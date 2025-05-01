@@ -1,0 +1,10 @@
+{
+  "name": "pixel-art-sprite-editor",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "echo lint placeholder",
+    "test": "node --version"
+  }
+}
