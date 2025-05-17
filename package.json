@@ -5,6 +5,6 @@
   "type": "module",
   "scripts": {
     "lint": "echo lint placeholder",
-    "test": "node --version"
+    "test": "node --input-type=module -e \"import('./tests/sprite.test.js').then(()=>console.log('ok')).catch(e=>{console.error(e);process.exit(1)})\""
   }
 }
