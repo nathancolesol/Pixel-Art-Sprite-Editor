@@ -20,6 +20,17 @@ if (cmd==='init'){
   s.fill(color);
   save(s);
   console.log('filled with', color);
+} else if (cmd==='set'){
+  const [x,y,color=1]=args.map(Number);
+  const data = JSON.parse(fs.readFileSync('sprite.json','utf8'));
+  const s=new Sprite(data.w,data.h);
+  s.pixels=data.p;
+  if(!s.setPixel(x,y,color)){
+    console.error('coords out of bounds');
+    process.exit(2);
+  }
+  save(s);
+  console.log(`set (${x},${y}) to`, color);
 } else {
-  console.log('usage: pase <init|fill>');
+  console.log('usage: pase <init|fill|set>');
 }
