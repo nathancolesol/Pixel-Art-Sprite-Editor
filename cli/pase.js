@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 import { Sprite } from '../src/sprite.js';
-import fs from 'fs';
+import { saveJSON, loadJSON } from '../src/io.js';
 const [,,cmd,...args]=process.argv;
 
-function save(sprite, file='sprite.json'){
-  fs.writeFileSync(file, JSON.stringify({w:sprite.width,h:sprite.height,p:sprite.pixels}));
-}
+const save = saveJSON;
 
 if (cmd==='init'){
   const [w,h]=args.map(Number);
@@ -14,7 +12,7 @@ if (cmd==='init'){
   console.log('created sprite.json');
 } else if (cmd==='fill'){
   const [color=1]=args.map(Number);
-  const data = JSON.parse(fs.readFileSync('sprite.json','utf8'));
+  const data = loadJSON('sprite.json');
   const s=new Sprite(data.w,data.h);
   s.pixels=data.p;
   s.fill(color);
@@ -22,7 +20,7 @@ if (cmd==='init'){
   console.log('filled with', color);
 } else if (cmd==='set'){
   const [x,y,color=1]=args.map(Number);
-  const data = JSON.parse(fs.readFileSync('sprite.json','utf8'));
+  const data = loadJSON('sprite.json');
   const s=new Sprite(data.w,data.h);
   s.pixels=data.p;
   if(!s.setPixel(x,y,color)){
