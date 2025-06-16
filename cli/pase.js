@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Sprite } from '../src/sprite.js';
 import { saveJSON, loadJSON } from '../src/io.js';
+import { savePPM } from '../src/png.js';
 const [,,cmd,...args]=process.argv;
 
 const save = saveJSON;
@@ -29,6 +30,13 @@ if (cmd==='init'){
   }
   save(s);
   console.log(`set (${x},${y}) to`, color);
+} else if (cmd==='export'){
+  const [out='sprite.ppm']=args;
+  const data = loadJSON('sprite.json');
+  const s=new Sprite(data.w,data.h);
+  s.pixels=data.p;
+  savePPM(s,out);
+  console.log('wrote', out);
 } else {
-  console.log('usage: pase <init|fill|set>');
+  console.log('usage: pase <init|fill|set|export>');
 }
