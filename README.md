@@ -10,3 +10,5 @@ Quick start
 
 Notes
 - Personal learning project; commits happen in small evening chunks.
+- Palette
+- Index 0 is background, others arbitrary RGB in exporter.
